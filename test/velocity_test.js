@@ -22,7 +22,7 @@ describe('Velocity', function(){
 	    velocity = new Velocity();
 	});
 
-	['speed', 'heading', 'velocity', 'tick'].forEach(function(methodName){
+	['speed', 'heading', 'velocity', 'tick', 'state'].forEach(function(methodName){
 	    it('should respond to ' + methodName, function(){
 		expect(velocity).to.respondTo(methodName);
 	    });
@@ -118,6 +118,24 @@ describe('Velocity', function(){
 		expect(velocity.x()).to.be.closeTo(testCase.x, 0.0001);
 	    });
 
+	});
+    });
+
+    describe('state', function(){
+	var velocity;
+
+	beforeEach(function(){
+	    velocity = new Velocity();
+	    velocity.position({ x: 0, y: 0 });
+	    velocity.velocity({ speed: 1, heading: 0 });
+	});
+
+	['x', 'y', 'radius', 'speed', 'heading'].forEach(function(key){
+	    it('should contain the key ' + key, function(){
+		var state = velocity.state();
+
+		expect(state).to.contain.keys(key);
+	    });
 	});
     });
 
