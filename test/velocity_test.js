@@ -95,4 +95,30 @@ describe('Velocity', function(){
 	});
     });
 
+    describe('tick', function(){
+	var velocity;
+
+	beforeEach(function(){
+	    velocity = new Velocity();
+	    velocity.position({ x: 0, y: 0 });
+	    velocity.velocity({ speed: 1, heading: 0 });
+	});
+
+	[
+	    { heading: 0,          x:  1.0, y:  0.0 },
+	    { heading: Math.PI,    x: -1.0, y:  0.0 },
+	    { heading: Math.PI/2,  x:  0.0, y:  1.0 },
+	    { heading: -Math.PI/2, x:  0.0, y: -1.0 },
+	].forEach(function(testCase){
+	    it('should update position when heading is ' + testCase.heading, function(){
+		velocity.velocity(testCase);
+
+		velocity.tick();
+
+		expect(velocity.x()).to.be.closeTo(testCase.x, 0.0001);
+	    });
+
+	});
+    });
+
 });
