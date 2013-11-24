@@ -1,0 +1,22 @@
+{
+  "name": "asteroids-velocity",
+  "version": "0.0.0",
+  "description": "Velocity entity for the Asteroids object",
+  "main": "lib/velocity.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dvberkel/asteroids-velocity.git"
+  },
+  "keywords": [
+    "asteroids",
+    "velocity"
+  ],
+  "author": "Daan van Berkel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dvberkel/asteroids-velocity/issues"
+  }
+}
