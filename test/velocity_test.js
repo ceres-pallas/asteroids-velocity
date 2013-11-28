@@ -22,7 +22,7 @@ describe('Velocity', function(){
 	    velocity = new Velocity();
 	});
 
-	['speed', 'heading', 'velocity', 'tick', 'state'].forEach(function(methodName){
+	['speed', 'heading', 'velocity', 'omega', 'tick', 'state'].forEach(function(methodName){
 	    it('should respond to ' + methodName, function(){
 		expect(velocity).to.respondTo(methodName);
 	    });
@@ -34,10 +34,6 @@ describe('Velocity', function(){
 
 	beforeEach(function(){
 	    velocity = new Velocity;
-	});
-
-	it('should have a default speed', function(){
-	    expect(velocity.speed()).to.equal(0);
 	});
 
 	it('should have a default speed', function(){
@@ -65,13 +61,14 @@ describe('Velocity', function(){
 	});
 
 	it('should have a default velocity', function(){
-	    expect(velocity.velocity()).to.deep.equal({ speed: 0, heading: 0 });
+	    expect(velocity.velocity()).to.deep.equal({ speed: 0, heading: 0, omega: 0 });
 	});
 
 	it('should be able to set the velocity', function(){
 	    var value = {
 		'speed': 1,
-		'heading': Math.PI/3
+		'heading': Math.PI/3,
+		'omega': 0
 	    };
 
 	    velocity.velocity(value);
@@ -79,13 +76,29 @@ describe('Velocity', function(){
 	    expect(velocity.velocity()).to.deep.equal(value);
 	});
 
+	it('should have a default omega', function(){
+	    expect(velocity.omega()).to.equal(0);
+	});
+
+	it('should be able to set the omega', function(){
+	    var value = Math.PI/6;
+
+	    velocity.omega(value);
+
+	    expect(velocity.omega()).to.equal(value);
+	});
 
 	[
 	    function(velocity){ velocity.speed(1.0); },
 	    function(velocity){ velocity.heading(Math.PI); },
+	    function(velocity){ velocity.omega(Math.PI/2); },
 	    function(velocity){ velocity.velocity({ 'speed': 1.0 }); },
 	    function(velocity){ velocity.velocity({ 'heading': Math.PI }); },
+	    function(velocity){ velocity.velocity({ 'omega': Math.PI/2 }); },
 	    function(velocity){ velocity.velocity({ 'speed': 1.0, 'heading': Math.PI }); },
+	    function(velocity){ velocity.velocity({ 'speed': 1.0, 'omega': Math.PI/2 }); },
+	    function(velocity){ velocity.velocity({ 'heading': Math.PI, 'omega': Math.PI/2 }); },
+	    function(velocity){ velocity.velocity({ 'speed': 1.0, 'heading': Math.PI, 'omega': Math.PI/2 }); },
 	].forEach(function(mutator){
 	    it('should notify upon changes', function(done){
 		velocity.addListener('velocity', function(){ done() });
@@ -130,7 +143,7 @@ describe('Velocity', function(){
 	    velocity.velocity({ speed: 1, heading: 0 });
 	});
 
-	['x', 'y', 'radius', 'speed', 'heading'].forEach(function(key){
+	['x', 'y', 'radius', 'orientation', 'speed', 'heading', 'omega'].forEach(function(key){
 	    it('should contain the key ' + key, function(){
 		var state = velocity.state();
 
