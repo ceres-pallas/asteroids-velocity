@@ -129,6 +129,7 @@ describe('Velocity', function(){
                 velocity.tick();
 
                 expect(velocity.x()).to.be.closeTo(testCase.x, 0.0001);
+                expect(velocity.y()).to.be.closeTo(testCase.y, 0.0001);
             });
 
         });
