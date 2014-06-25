@@ -118,22 +118,23 @@ describe('Velocity', function(){
         });
 
         [
-            { heading: 0,          omega: 0,         x:  1.0, y:  0.0, h: 0.0 },
-            { heading: Math.PI,    omega: 0,         x: -1.0, y:  0.0, h: Math.PI },
-            { heading: Math.PI/2,  omega: 0,         x:  0.0, y:  1.0, h: Math.PI/2 },
-            { heading: -Math.PI/2, omega: 0,         x:  0.0, y: -1.0, h: -Math.PI/2 },
-            { heading: 0,          omega: Math.PI/2, x:  1.0, y:  0.0, h: 1*Math.PI/2 },
-            { heading: Math.PI,    omega: Math.PI/2, x: -1.0, y:  0.0, h: 3*Math.PI/2 },
-            { heading: Math.PI/2,  omega: Math.PI/2, x:  0.0, y:  1.0, h: 2*Math.PI/2 }
+            { heading: 0,          omega: 0,          x:  1.0, y:  0.0, o: 0.0 },
+            { heading: Math.PI,    omega: 0,          x: -1.0, y:  0.0, o: 0.0 },
+            { heading: Math.PI/2,  omega: 0,          x:  0.0, y:  1.0, o: 0.0 },
+            { heading: -Math.PI/2, omega: 0,          x:  0.0, y: -1.0, o: 0.0 },
+            { heading: 0,          omega: Math.PI/2,  x:  1.0, y:  0.0, o: Math.PI/2 },
+            { heading: Math.PI,    omega: Math.PI/3,  x: -1.0, y:  0.0, o: Math.PI/3 },
+            { heading: Math.PI/2,  omega: Math.PI/4,  x:  0.0, y:  1.0, o: Math.PI/4 },
+            { heading: -Math.PI/2, omega: -Math.PI/5, x:  0.0, y: -1.0, o: -Math.PI/5 }
         ].forEach(function(testCase){
             it('should update position when heading is ' + testCase.heading, function(){
                 velocity.velocity(testCase);
 
                 velocity.tick();
 
-                expect(velocity.x()      ).to.be.closeTo(testCase.x, 0.0001);
-                expect(velocity.y()      ).to.be.closeTo(testCase.y, 0.0001);
-                expect(velocity.heading()).to.be.closeTo(testCase.h, 0.0001);
+                expect(velocity.x()          ).to.be.closeTo(testCase.x, 0.0001);
+                expect(velocity.y()          ).to.be.closeTo(testCase.y, 0.0001);
+                expect(velocity.orientation()).to.be.closeTo(testCase.o, 0.0001);
             });
 
         });
