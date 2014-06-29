@@ -138,6 +138,30 @@ describe('Velocity', function(){
             });
 
         });
+
+		it('should be possible to set heading to 0', function(){
+			velocity.heading(1);
+
+			velocity.heading(0);
+
+			expect(velocity.heading()).to.equal(0);
+		});
+
+		it('should be possible to set speed to 0', function(){
+			velocity.speed(1);
+
+			velocity.speed(0);
+
+			expect(velocity.speed()).to.equal(0);
+		});
+
+		it('should be possible to set omega to 0', function(){
+			velocity.omega(1);
+
+			velocity.omega(0);
+
+			expect(velocity.omega()).to.equal(0);
+		});
     });
 
     describe('state', function(){
