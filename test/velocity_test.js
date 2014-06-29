@@ -182,4 +182,14 @@ describe('Velocity', function(){
         });
     });
 
+	it('heading should not influence omega on a speed update (issue #3)', function(){
+		velocity = new Velocity();
+		velocity.heading(Math.PI/2);
+		velocity.omega(0);
+		velocity.speed(1);
+
+		expect(velocity.omega()).to.equal(0);
+
+	});
+
 });
